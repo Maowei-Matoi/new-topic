@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Majestic China | Natural Wonders</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #1A1A1A; /* Deep Black */
+            --accent: #D9A06F; /* Sophisticated Bronze/Tan */
+            --bg-light: #F9F9F9;
+            --text-main: #333333;
+            --font-heading: 'Oswald', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+            --transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: var(--font-body);
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* --- IMMERSIVE HERO SECTION --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
+                              url('https://images.unsplash.com/photo-1545153996-857597148560?auto=format&fit=crop&w=1920&q=80'); /* Mount Huangshan Placeholder */
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transform: scale(1.1);
+            animation: kenburns 20s infinite alternate; /* The subtle zoom effect */
+        }
+
+        @keyframes kenburns {
+            to { transform: scale(1); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 10;
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: 6rem;
+            letter-spacing: 0.5rem;
+            text-transform: uppercase;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            margin-top: 10px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* --- SPLIT LAYOUT SECTIONS --- */
+        .split-section {
+            display: flex;
+            min-height: 80vh;
+            width: 100%;
+        }
+
+        .split-image, .split-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .split-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .split-text {
+            padding: 100px;
+            background: white;
+        }
+
+        .section-category {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0 0 30px 0;
+            line-height: 1.1;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-main);
+            margin-bottom: 40px;
+        }
+
+        .btn-complex {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.1rem;
+            font-size: 0.8rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-complex::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: var(--primary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn-complex:hover {
+            color: white;
+        }
+
+        .btn-complex:hover::before {
+            left: 0;
+        }
+
+        /* Revered layout for alternating sections */
+        .split-section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        /* --- COMPLEX ADVANCED GALLERY SECTION --- */
+        .gallery-advanced {
+            padding: 100px 20px;
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .gallery-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 80px auto;
+        }
+
+        .gallery-header h2 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            margin: 0;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            bottom: 0;
+        }
+
+        .item-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .item-location {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--accent);
+            letter-spacing: 0.1rem;
+        }
+
+        /* --- ADVANCED FOOTER --- */
+        footer {
+            background-color: #111;
+            color: rgba(255,255,255,0.6);
+            padding: 80px 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: white;
+            letter-spacing: 0.2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4 {
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 50px auto 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Majestic China</h1>
+            <p class="hero-subtitle">Nature's grandest spectacles, unified.</p>
+        </div>
+    </section>
+
+    <section class="split-section">
+        <div class="split-image">
+            <img src="https://images.unsplash.com/photo-1599571029012-421739c9f286?auto=format&fit=crop&w=1000&q=80" alt="Zhangjiajie">
+        </div>
+        <div class="split-text">
+            <span class="section-category">Mountain Wonders</span>
+            <h2 class="section-title">The Zhangjiajie Spires</h2>
+            <p class="section-desc">Witness the surreal, quartz-sandstone pillars that inspired the 'Hallelujah Mountains' of *Avatar*. These thousands of jagged peaks rise abruptly from mist-shrouded ravines, creating an otherworldly landscape unlike any on Earth.</p>
+            <a href="#" class="btn-complex">Explore Peaks</a>
+        </div>
+    </section>
+
+    <section class="split-section reverse">
+        <div class="split-image">
+            <img src="https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1000&q=80" alt="Jiuzhaigou">
+        </div>
+        <div class="split-text">
+            <span class="section-category">Water & Mirrors</span>
+            <h2 class="section-title">Jiuzhaigou Valley</h2>
+            <p class="section-desc">A masterpiece of nature's palette. This UNESCO World Heritage site is renowned for its multi-tiered waterfalls and crystal-clear lakes that shift through shades of turquoise, emerald, and sapphire, set against a backdrop of snow-capped mountains.</p>
+            <a href="#" class="btn-complex">Discover Waters</a>
+        </div>
+    </section>
+
+    <section class="gallery-advanced">
+        <div class="gallery-header">
+            <h2>The Unseen Frontiers</h2>
+            <p>From the desert sun to the eternal snow, China holds landscapes that defy imagination.</p>
+        </div>
+        
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1582650841269-e741c88c7d9d?auto=format&fit=crop&w=600&q=80" alt="Li River">
+                <div class="gallery-overlay">
+                    <p class="item-location">Guilin</p>
+                    <h4 class="item-title">The Li River</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?auto=format&fit=crop&w=600&q=80" alt="Tibet">
+                <div class="gallery-overlay">
+                    <p class="item-location">Tibet</p>
+                    <h4 class="item-title">Potala Palace View</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1501724694468-154dfb8d4c4a?auto=format&fit=crop&w=600&q=80" alt="Zhangye Danxia">
+                <div class="gallery-overlay">
+                    <p class="item-location">Gansu</p>
+                    <h4 class="item-title">Rainbow Mountains</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1628155988582-749e759160d2?auto=format&fit=crop&w=600&q=80" alt="Huangshan">
+                <div class="gallery-overlay">
+                    <p class="item-location">Anhui</p>
+                    <h4 class="item-title">Mount Huangshan</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo">MAJESTIC CHINA</div>
+                <p>Exploring and preserving the unparalleled natural heritage of the Middle Kingdom.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Wonders</h4>
+                <ul>
+                    <li><a href="#" style="color: inherit;">Zhangjiajie</a></li>
+                    <li><a href="#" style="color: inherit;">Jiuzhaigou</a></li>
+                    <li><a href="#" style="color: inherit;">Li River</a></li>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#" style="color: inherit;">Best Time to Visit</a></li>
+                        <li><a href="#" style="color: inherit;">Eco-Tourism</a></li>
+                        <li><a href="#" style="color: inherit;">Gallery</a></li>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Majestic China Exploration Group. All natural rights reserved.</p>
+                </div>
+            </footer>
+
+</body>
+</html>
