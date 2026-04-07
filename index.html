@@ -8,8 +8,8 @@
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
-            --primary: #1A1A1A; /* Deep Black */
-            --accent: #D9A06F; /* Sophisticated Bronze/Tan */
+            --primary: #1A1A1A;
+            --accent: #D9A06F;
             --bg-light: #F9F9F9;
             --text-main: #333333;
             --font-heading: 'Oswald', sans-serif;
@@ -41,13 +41,14 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
-                              url('https://images.unsplash.com/photo-1545153996-857597148560?auto=format&fit=crop&w=1920&q=80'); /* Mount Huangshan Placeholder */
+            /* Huangshan Landscape from Unsplash */
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+                              url('https://images.unsplash.com/photo-1545153996-857597148560?auto=format&fit=crop&w=1920&q=80'); 
             background-size: cover;
             background-position: center;
             z-index: -1;
             transform: scale(1.1);
-            animation: kenburns 20s infinite alternate; /* The subtle zoom effect */
+            animation: kenburns 20s infinite alternate;
         }
 
         @keyframes kenburns {
@@ -62,7 +63,7 @@
 
         .hero-title {
             font-family: var(--font-heading);
-            font-size: 6rem;
+            font-size: clamp(3rem, 10vw, 6rem);
             letter-spacing: 0.5rem;
             text-transform: uppercase;
             margin: 0;
@@ -74,19 +75,20 @@
             font-weight: 300;
             letter-spacing: 0.2rem;
             text-transform: uppercase;
-            margin-top: 10px;
+            margin-top: 20px;
             color: rgba(255,255,255,0.8);
         }
 
         /* --- SPLIT LAYOUT SECTIONS --- */
         .split-section {
             display: flex;
+            flex-wrap: wrap;
             min-height: 80vh;
             width: 100%;
         }
 
         .split-image, .split-text {
-            flex: 1;
+            flex: 1 1 500px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -96,11 +98,13 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
         .split-text {
-            padding: 100px;
+            padding: 10% 8%;
             background: white;
+            box-sizing: border-box;
         }
 
         .section-category {
@@ -109,12 +113,12 @@
             letter-spacing: 0.2rem;
             color: var(--accent);
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .section-title {
             font-family: var(--font-heading);
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             color: var(--primary);
             margin: 0 0 30px 0;
             line-height: 1.1;
@@ -141,6 +145,7 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            width: fit-content;
         }
 
         .btn-complex::before {
@@ -153,20 +158,12 @@
             z-index: -1;
         }
 
-        .btn-complex:hover {
-            color: white;
-        }
+        .btn-complex:hover { color: white; }
+        .btn-complex:hover::before { left: 0; }
 
-        .btn-complex:hover::before {
-            left: 0;
-        }
+        .split-section.reverse { flex-direction: row-reverse; }
 
-        /* Revered layout for alternating sections */
-        .split-section.reverse {
-            flex-direction: row-reverse;
-        }
-
-        /* --- COMPLEX ADVANCED GALLERY SECTION --- */
+        /* --- GALLERY SECTION --- */
         .gallery-advanced {
             padding: 100px 20px;
             background-color: var(--primary);
@@ -182,12 +179,12 @@
         .gallery-header h2 {
             font-family: var(--font-heading);
             font-size: 3.5rem;
-            margin: 0;
+            margin-bottom: 20px;
         }
 
         .gallery-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 15px;
             max-width: 1400px;
             margin: 0 auto;
@@ -195,7 +192,7 @@
 
         .gallery-item {
             position: relative;
-            height: 400px;
+            height: 450px;
             overflow: hidden;
             cursor: pointer;
         }
@@ -222,13 +219,8 @@
             transition: var(--transition);
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            bottom: 0;
-        }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-item:hover .gallery-overlay { bottom: 0; }
 
         .item-title {
             font-family: var(--font-heading);
@@ -244,19 +236,18 @@
             letter-spacing: 0.1rem;
         }
 
-        /* --- ADVANCED FOOTER --- */
+        /* --- FOOTER --- */
         footer {
-            background-color: #111;
+            background-color: #0c0c0c;
             color: rgba(255,255,255,0.6);
-            padding: 80px 20px;
-            font-size: 0.9rem;
+            padding: 80px 20px 40px;
         }
 
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 50px;
         }
 
@@ -271,26 +262,28 @@
         .footer-links h4 {
             color: white;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 1rem;
         }
 
         .footer-links ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
-        .footer-links li {
-            margin-bottom: 10px;
-        }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: inherit; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--accent); }
 
         .footer-bottom {
             max-width: 1200px;
-            margin: 50px auto 0 auto;
+            margin: 60px auto 0 auto;
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 30px;
             text-align: center;
+            font-size: 0.8rem;
         }
-
     </style>
 </head>
 <body>
@@ -305,7 +298,7 @@
 
     <section class="split-section">
         <div class="split-image">
-            <img src="https://images.unsplash.com/photo-1599571029012-421739c9f286?auto=format&fit=crop&w=1000&q=80" alt="Zhangjiajie">
+            <img src="https://images.unsplash.com/photo-1599571029012-421739c9f286?auto=format&fit=crop&w=1200&q=80" alt="Zhangjiajie Mountains">
         </div>
         <div class="split-text">
             <span class="section-category">Mountain Wonders</span>
@@ -317,12 +310,12 @@
 
     <section class="split-section reverse">
         <div class="split-image">
-            <img src="https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1000&q=80" alt="Jiuzhaigou">
+            <img src="https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=80" alt="Jiuzhaigou National Park">
         </div>
         <div class="split-text">
             <span class="section-category">Water & Mirrors</span>
             <h2 class="section-title">Jiuzhaigou Valley</h2>
-            <p class="section-desc">A masterpiece of nature's palette. This UNESCO World Heritage site is renowned for its multi-tiered waterfalls and crystal-clear lakes that shift through shades of turquoise, emerald, and sapphire, set against a backdrop of snow-capped mountains.</p>
+            <p class="section-desc">A masterpiece of nature's palette. This UNESCO World Heritage site is renowned for its multi-tiered waterfalls and crystal-clear lakes that shift through shades of turquoise, emerald, and sapphire.</p>
             <a href="#" class="btn-complex">Discover Waters</a>
         </div>
     </section>
@@ -335,28 +328,28 @@
         
         <div class="gallery-container">
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1582650841269-e741c88c7d9d?auto=format&fit=crop&w=600&q=80" alt="Li River">
+                <img src="https://images.unsplash.com/photo-1582650841269-e741c88c7d9d?auto=format&fit=crop&w=800&q=80" alt="Li River Guilin">
                 <div class="gallery-overlay">
                     <p class="item-location">Guilin</p>
                     <h4 class="item-title">The Li River</h4>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?auto=format&fit=crop&w=600&q=80" alt="Tibet">
+                <img src="https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?auto=format&fit=crop&w=800&q=80" alt="Potala Palace Tibet">
                 <div class="gallery-overlay">
                     <p class="item-location">Tibet</p>
                     <h4 class="item-title">Potala Palace View</h4>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1501724694468-154dfb8d4c4a?auto=format&fit=crop&w=600&q=80" alt="Zhangye Danxia">
+                <img src="https://images.unsplash.com/photo-1501724694468-154dfb8d4c4a?auto=format&fit=crop&w=800&q=80" alt="Rainbow Mountains Gansu">
                 <div class="gallery-overlay">
                     <p class="item-location">Gansu</p>
                     <h4 class="item-title">Rainbow Mountains</h4>
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1628155988582-749e759160d2?auto=format&fit=crop&w=600&q=80" alt="Huangshan">
+                <img src="https://images.unsplash.com/photo-1628155988582-749e759160d2?auto=format&fit=crop&w=800&q=80" alt="Yellow Mountains Huangshan">
                 <div class="gallery-overlay">
                     <p class="item-location">Anhui</p>
                     <h4 class="item-title">Mount Huangshan</h4>
@@ -374,22 +367,24 @@
             <div class="footer-links">
                 <h4>Wonders</h4>
                 <ul>
-                    <li><a href="#" style="color: inherit;">Zhangjiajie</a></li>
-                    <li><a href="#" style="color: inherit;">Jiuzhaigou</a></li>
-                    <li><a href="#" style="color: inherit;">Li River</a></li>
-                </div>
-                <div class="footer-links">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#" style="color: inherit;">Best Time to Visit</a></li>
-                        <li><a href="#" style="color: inherit;">Eco-Tourism</a></li>
-                        <li><a href="#" style="color: inherit;">Gallery</a></li>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2026 Majestic China Exploration Group. All natural rights reserved.</p>
-                </div>
-            </footer>
+                    <li><a href="#">Zhangjiajie</a></li>
+                    <li><a href="#">Jiuzhaigou</a></li>
+                    <li><a href="#">Li River</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Best Time to Visit</a></li>
+                    <li><a href="#">Eco-Tourism</a></li>
+                    <li><a href="#">Gallery</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Majestic China Exploration Group. All natural rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
